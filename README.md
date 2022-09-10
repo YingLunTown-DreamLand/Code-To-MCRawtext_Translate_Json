@@ -1,5 +1,5 @@
 # Code-To-MCRawtext_Translate_Json
-这是一个翻译软件，用于将 `伪代码` 形式的 `JSON` 文件转换为 `Minecraft Bedrock Edition` 中的 `Tellraw`
+这是一个翻译软件，用于将 `伪代码` 写成的 `JSON` 文件转换为 `Minecraft Bedrock Edition` 中的 `Tellraw`
 或 `Titleraw` 命令。
 
 ## 如何使用？
