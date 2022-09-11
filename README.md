@@ -41,7 +41,8 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github
 您可以通过 `QQ` 联系我，我的 `QQ` 是 `3527679800` 。
 
 ## 更新日志
-   - 暂无
+   - `2022/09/11 Morning - Alpha`
+      - 现在输出的 `JSON` 更短了；同时修复了一些潜在性问题 & 于 [5ecd234](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/5ecd2348703d42efab5de08afb1c76612ebce9be) 更新和修复
 
 ## 免责声明(This is not translated into English)
 - 若因为使用本软件而造成了任何可能的问题，我不会对此负责。 
