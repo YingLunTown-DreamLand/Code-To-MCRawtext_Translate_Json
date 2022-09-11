@@ -118,7 +118,7 @@ def structuralBody(scoreboardName:str,input:list)->dict:
     scoresConditions = []
     saveList = []
     # 初始化
-    for i in range(min((len(input)),3)):
+    for i in range(min((len(input)),7)):
         scoresConditions.append([input[i]['分数条件'][0],input[i]['分数条件'][1],i])
         nestedLocation = input[i]['嵌套位置']
         # 取得 分数条件 及 嵌套位置
@@ -142,7 +142,7 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                     )
                 )
             os.system("pause")
-            sys.exit()
+            0/0
         if len(input[i]['内容']) > 1:
             saveList.append({"rawtext":input[i]['内容']})
         else:
@@ -152,10 +152,10 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                 saveList.append({"text":""})
         # 向 ans 列表放入“分数条件”
         # 向 saveList 列表放入“显示内容”
-    # 处理至多 3 项的内容
-    if len(input) > 4:
-        ans['rawtext'][0]['translate'] = '%%5'
-        # 此时应该显示 with 复合标签中的第 5 项元素
+    # 处理至多 7 项的内容
+    if len(input) > 8:
+        ans['rawtext'][0]['translate'] = '%%9'
+        # 此时应该显示 with 复合标签中的第 9 项元素
         scoresConditions = [[input[i]['分数条件'][0],input[i]['分数条件'][1],i] for i in range(len(input))]
         try:
             ans['rawtext'][0]['with']['rawtext'].append(
@@ -174,19 +174,19 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                     )
                 )
             os.system("pause")
-            sys.exit()
-        # 此时应筛选出所有条件下的结果，并作为 with 复合标签的第 4 项元素
+            0/0
+        # 此时应筛选出所有条件下的结果，并作为 with 复合标签的第 16 项元素
         for i in saveList:
             ans['rawtext'][0]['with']['rawtext'].append(i)
         # 将 显示内容 插入到 分数条件(目标选择器) 之后
-        ans['rawtext'][0]['with']['rawtext'].append(structuralBody(scoreboardName,input[3:]))
-        # 受限于 MC 本身的牛马特性，一个 with 复合标签最多可以使用 8 元素，即 4 个条件及对应的 显示内容
-        # 这样的话，我们得把第 4 个条件取所有条件的并集，然后向下递归，直到最内层被完成，然后回递
-    # 当输入的 input 列表中的元素个数超过 4 时的处理办法
+        ans['rawtext'][0]['with']['rawtext'].append(structuralBody(scoreboardName,input[7:]))
+        # 受限于 MC 本身的牛马特性，最多解析到 with 数组的第 9 项，即 8 个条件及对应的 显示内容
+        # 这样的话，我们得把第 8 个条件取所有条件的并集，然后向下递归，直到最内层被完成，然后回递
+    # 当输入的 input 列表中的元素个数超过 8 时的处理办法
     else:
-        if len(input) == 4:
-            ans['rawtext'][0]['translate'] = '%%5'
-            # 此时应该显示 with 复合标签中的第 5 项元素
+        if len(input) == 8:
+            ans['rawtext'][0]['translate'] = '%%9'
+            # 此时应该显示 with 复合标签中的第 9 项元素
             scoresConditions.append([input[-1]['分数条件'][0],input[-1]['分数条件'][1],3])
             nestedLocation = input[-1]['嵌套位置']
             # 取得 分数条件 及 嵌套位置
@@ -202,7 +202,7 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                 print('错误：您给出的 分数条件 存在重复的区间，请检查后重试。具体错误发生在：')
                 print(scoresConditions)
                 os.system("pause")
-                sys.exit()
+                0/0
             if len(input[-1]['内容']) > 1:
                 saveList.append({"rawtext":input[-1]['内容']})
             else:
@@ -212,15 +212,15 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                     saveList.append({"text":""})
             # 向 ans 列表放入“分数条件”
             # 向 saveList 列表放入“显示内容”
-        # 当输入的 input 列表中的元素个数为 4 时的处理办法
+        # 当输入的 input 列表中的元素个数为 8 时的处理办法
         else:
             ans['rawtext'][0]['translate'] = '%%' + str(len(ans['rawtext'][0]['with']['rawtext']) + 1)
             # 此时应该显示 with 复合标签中的第 条件数+1 项元素
-        # 当输入的 input 列表中的元素小于 4 时的处理办法
+        # 当输入的 input 列表中的元素小于 8 时的处理办法
         for i in saveList:
             ans['rawtext'][0]['with']['rawtext'].append(i)
         # 将 显示内容 插入到 分数条件(目标选择器) 之后
-    # 当输入的 input 列表中的元素个数小于等于 4 时的处理办法
+    # 当输入的 input 列表中的元素个数小于等于 8 时的处理办法
     return ans
     # 返回值
 
@@ -236,5 +236,8 @@ def setGroup(input:dict)->dict:
     返回其内的 `结构体` 所对应的 `JSON` ，数据类型是 `dict`
     """
     # 函数声明
-    return structuralBody(input['计分板名称'],input['结构体'])
+    try:
+        return structuralBody(input['计分板名称'],input['结构体'])
+    except ZeroDivisionError:
+        0/0
     # 返回值

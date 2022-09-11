@@ -16,6 +16,8 @@ except:
 
 try:
     jsonContext = function.setGroup(jsonContext)
+except ZeroDivisionError:
+    sys.exit()
 except:
     print('错误：在转换时发生了未知错误。如果不出意外，可能是您提供了不正确的 JSON 文件\n相关错误日志如下：\n')
     print(traceback.format_exc())

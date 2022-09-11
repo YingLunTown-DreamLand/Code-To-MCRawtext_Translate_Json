@@ -1,0 +1,100 @@
+{
+    "rawtext": [
+        {
+            "translate": "%%7", 
+            "with": {
+                "rawtext": [
+                    {
+                        "selector": "@s[scores={scoreSave=!..0,scoreSave=!10..}]"
+                    }, 
+                    {
+                        "selector": "@s[scores={scoreSave=!..0,scoreSave=!100..}]"
+                    }, 
+                    {
+                        "selector": "@s[scores={scoreSave=!..0,scoreSave=!1000..}]"
+                    }, 
+                    {
+                        "selector": "@s[scores={scoreSave=!..0,scoreSave=!10000..}]"
+                    }, 
+                    {
+                        "selector": "@s[scores={scoreSave=!..0,scoreSave=!100000..}]"
+                    }, 
+                    {
+                        "selector": "@s[scores={scoreSave=!..0,scoreSave=!1000000..}]"
+                    }, 
+                    {
+                        "rawtext": [
+                            {
+                                "text": "00000"
+                            }, 
+                            {
+                                "score": {
+                                    "name": "@s", 
+                                    "objective": "scoreSave"
+                                }
+                            }
+                        ]
+                    }, 
+                    {
+                        "rawtext": [
+                            {
+                                "text": "0000"
+                            }, 
+                            {
+                                "score": {
+                                    "name": "@s", 
+                                    "objective": "scoreSave"
+                                }
+                            }
+                        ]
+                    }, 
+                    {
+                        "rawtext": [
+                            {
+                                "text": "000"
+                            }, 
+                            {
+                                "score": {
+                                    "name": "@s", 
+                                    "objective": "scoreSave"
+                                }
+                            }
+                        ]
+                    }, 
+                    {
+                        "rawtext": [
+                            {
+                                "text": "00"
+                            }, 
+                            {
+                                "score": {
+                                    "name": "@s", 
+                                    "objective": "scoreSave"
+                                }
+                            }
+                        ]
+                    }, 
+                    {
+                        "rawtext": [
+                            {
+                                "text": "0"
+                            }, 
+                            {
+                                "score": {
+                                    "name": "@s", 
+                                    "objective": "scoreSave"
+                                }
+                            }
+                        ]
+                    }, 
+                    {
+                        "score": {
+                            "name": "@s", 
+                            "objective": "scoreSave"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

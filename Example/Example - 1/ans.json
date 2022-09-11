@@ -1,0 +1,65 @@
+{
+    "rawtext": [
+        {
+            "translate": "%%2", 
+            "with": {
+                "rawtext": [
+                    {
+                        "selector": "@s[scores={\"Happy2018new\"=!..7,\"Happy2018new\"=!13..}]"
+                    }, 
+                    {
+                        "rawtext": [
+                            {
+                                "text": "不好"
+                            }, 
+                            {
+                                "rawtext": [
+                                    {
+                                        "translate": "%%2", 
+                                        "with": {
+                                            "rawtext": [
+                                                {
+                                                    "selector": "@s[scores={abcd=!..-2,abcd=!3..}]"
+                                                }, 
+                                                {
+                                                    "rawtext": [
+                                                        {
+                                                            "scores": {
+                                                                "name": "*", 
+                                                                "objective": "√"
+                                                            }
+                                                        }, 
+                                                        {
+                                                            "text": "测试"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }, 
+                            {
+                                "rawtext": [
+                                    {
+                                        "translate": "%%2", 
+                                        "with": {
+                                            "rawtext": [
+                                                {
+                                                    "selector": "@s[scores={\"123\"=!..-234,\"123\"=!-21..}]"
+                                                }, 
+                                                {
+                                                    "text": ""
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
