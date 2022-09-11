@@ -143,7 +143,13 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                 )
             os.system("pause")
             sys.exit()
-        saveList.append({"rawtext":input[i]['内容']})
+        if len(input[i]['内容']) > 1:
+            saveList.append({"rawtext":input[i]['内容']})
+        else:
+            if len(input[i]['内容']) == 1:
+                saveList.append(input[i]['内容'][0])
+            else:
+                saveList.append({"text":""})
         # 向 ans 列表放入“分数条件”
         # 向 saveList 列表放入“显示内容”
     # 处理至多 3 项的内容
@@ -197,7 +203,13 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                 print(scoresConditions)
                 os.system("pause")
                 sys.exit()
-            saveList.append({"rawtext":input[-1]['内容']})
+            if len(input[-1]['内容']) > 1:
+                saveList.append({"rawtext":input[-1]['内容']})
+            else:
+                if len(input[-1]['内容']) == 1:
+                    saveList.append(input[-1]['内容'][0])
+                else:
+                    saveList.append({"text":""})
             # 向 ans 列表放入“分数条件”
             # 向 saveList 列表放入“显示内容”
         # 当输入的 input 列表中的元素个数为 4 时的处理办法
