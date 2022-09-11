@@ -49,8 +49,7 @@ with open("指令.txt","w+",encoding='UTF-8') as file:
 
 print('完成：已将 input.json 转换为指令')
 print('已展开的 JSON 形式保存在当前目录下的 ans.json 中')
-print('指令已保存在当前目录下的 指令.txt 中')
-print('')
+print('指令已保存在当前目录下的 指令.txt 中\n')
 print('Made By Happy2018new')
 os.system("pause")
 sys.exit()
