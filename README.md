@@ -8,7 +8,7 @@
 2. 然后运行这个程序。
 ***
 注意事项<br>
-您应该参考 [input.json](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/blob/main/Example/input.json.py) 中的格式来编写 `伪代码` 形式的 `JSON` 文件。
+您应该参考 [input.json](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/blob/main/Example/Example%20-%201/input.json.py) 中的格式来编写 `伪代码` 形式的 `JSON` 文件。
 
 ## 从源代码运行程序(对于 `Termux` )
 您应该授予 `Termux` 存储权限，否则您将不能通过源代码来运行本程序。
@@ -41,6 +41,9 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github
 您可以通过 `QQ` 联系我，我的 `QQ` 是 `3527679800` 。
 
 ## 更新日志
+   - `2022/09/11 Afternoon - Alpha(2.0)`
+      - 进行了优化并增添了 `2` 个示例 & 于 [b3d2777](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/b3d2777d0cfbdac5efcfcc619e74c02e56d3830a) 更新
+         - 所有示例见 [Code-To-MCRawtext_Translate_Json/Example](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/tree/main/Example)
    - `2022/09/11 Morning - Alpha`
       - 现在输出的 `JSON` 更短了；同时修复了一些潜在性问题 & 于 [5ecd234](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/5ecd2348703d42efab5de08afb1c76612ebce9be) 更新和修复
 
