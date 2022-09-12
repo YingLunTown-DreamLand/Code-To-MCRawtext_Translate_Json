@@ -181,7 +181,7 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                 )
             os.system("pause")
             0/0
-        # 此时应筛选出所有条件下的结果，并作为 with 复合标签的第 16 项元素
+        # 此时应筛选出所有条件下的结果，并作为 with 复合标签的第 8 项元素
         for i in saveList:
             ans['rawtext'][0]['with']['rawtext'].append(i)
         # 将 显示内容 插入到 分数条件(目标选择器) 之后
