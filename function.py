@@ -16,7 +16,7 @@ def purification(self:list)->list:
     """
     # 函数声明
     self = copy.deepcopy(self)
-    self = [[min(i[0],i[1]),max(i[0],i[1])]for i in self]
+    self = [[min(i[0],i[1]),max(i[0],i[1])] for i in self]
     self.sort()
     # 以列表 self 中每个元素的最左边的数作为基准进行排序，使得总体大体单调递增
     for i in range(len(self)-1):
@@ -82,7 +82,10 @@ def outputSelector(input:list,scoreboardName:str)->str:
     ans = []
     # 初始化
     for i in input:
-        ans.append(f'{scoreboardName}=!{i[0]}..{i[1]}')
+        if i[0] != i[1]:
+            ans.append(f'{scoreboardName}=!{i[0]}..{i[1]}')
+        else:
+            ans.append(f'{scoreboardName}=!{i[-1]}')
     # 对列表内每个元素遍历，并转换为可用的选择器参数，然后放入列表 ans 中
     ans[0] = f'{scoreboardName}=!..{input[0][1]}'
     ans[-1] = f'{scoreboardName}=!{input[-1][0]}..'
@@ -118,7 +121,8 @@ def structuralBody(scoreboardName:str,input:list)->dict:
     saveList = []
     # 初始化
     for i in range(min((len(input)),7)):
-        scoresConditions.append([input[i]['分数条件'][0],input[i]['分数条件'][1],i])
+        for j in range(len(input[i]['分数条件'])):
+            scoresConditions.append(input[i]['分数条件'][j])
         nestedLocation = input[i]['嵌套位置']
         # 取得 分数条件 及 嵌套位置
         for k in nestedLocation:
@@ -155,7 +159,10 @@ def structuralBody(scoreboardName:str,input:list)->dict:
     if len(input) > 8:
         ans['rawtext'][0]['translate'] = '%%9'
         # 此时应该显示 with 复合标签中的第 9 项元素
-        scoresConditions = [[input[i]['分数条件'][0],input[i]['分数条件'][1],i] for i in range(len(input))]
+        scoresConditions = []
+        for i in range(len(input)):
+            for j in range(len(input[i]['分数条件'])):
+                scoresConditions.append(input[i]['分数条件'][j])
         try:
             ans['rawtext'][0]['with']['rawtext'].append(
                 {"selector":'@s['+outputSelector(getComplementarySet(purification(scoresConditions)),
@@ -186,7 +193,8 @@ def structuralBody(scoreboardName:str,input:list)->dict:
         if len(input) == 8:
             ans['rawtext'][0]['translate'] = '%%9'
             # 此时应该显示 with 复合标签中的第 9 项元素
-            scoresConditions.append([input[-1]['分数条件'][0],input[-1]['分数条件'][1],3])
+            for i in range(len(input[-1]['分数条件'])):
+                scoresConditions.append(input[-1]['分数条件'][i])
             nestedLocation = input[-1]['嵌套位置']
             # 取得 分数条件 及 嵌套位置
             for k in nestedLocation:
