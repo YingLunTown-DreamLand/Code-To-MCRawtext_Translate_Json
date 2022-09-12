@@ -41,6 +41,17 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github
 您可以通过 `QQ` 联系我，我的 `QQ` 是 `3527679800` 。
 
 ## 更新日志
+   - `2022/09/12 Morning - Alpha(2.5)`
+      - `分数条件` 的书写格式变更，更新为如下格式，即对一个单个的显示内容支持了更多的分数条件 & 于 [0786109](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/07861093026272c99d15f92f70e458d72bd692dc) 更新
+      ```
+      "分数条件":
+      [
+         [区间起始点, 区间终止点],
+         [区间起始点, 区间终止点],
+         ……,
+         [区间起始点, 区间终止点]
+      ]
+      ```
    - `2022/09/11 Afternoon - Alpha(2.0)`
       - 进行了优化并增添了 `2` 个示例 & 于 [b3d2777](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/b3d2777d0cfbdac5efcfcc619e74c02e56d3830a) 更新
          - 所有示例见 [Code-To-MCRawtext_Translate_Json/Example](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/tree/main/Example)
