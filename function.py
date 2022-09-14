@@ -219,6 +219,9 @@ def structuralBody(input:list)->dict:
         if len(input) == 8:
             ans['rawtext'][0]['translate'] = '%%9'
             # 此时应该显示 with 复合标签中的第 9 项元素
+            for k in input[-1]['嵌套位置']:
+                input[-1]['内容'][k-1] = structuralBody(input[-1]['内容'][k-1]['结构体'])
+            # 解析嵌套的部分
             ans['rawtext'][0]['with']['rawtext'].append(
             {
                 "selector":(
