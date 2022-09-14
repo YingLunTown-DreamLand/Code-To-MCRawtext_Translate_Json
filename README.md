@@ -41,6 +41,19 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github
 您可以通过 `QQ` 联系我，我的 `QQ` 是 `3527679800` 。
 
 ## 更新日志
+   - `2022/09/14 Morning - Alpha(4.0)`
+   下述特性于 [d04ac9f](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/d04ac9f095ae3168bea082865d378b31a24898a3) 更新
+      - 弃用 `计分板名称`
+      - `分数条件` 的书写格式变更，更新为如下格式，即对一个单个的显示内容支持了更多的分数条件
+      ```
+      "分数条件":
+      {
+         "计分板":[ [区间起始点, 区间终止点], [区间起始点, 区间终止点], ……, [区间起始点, 区间终止点] ],
+         "计分板":[ [区间起始点, 区间终止点], [区间起始点, 区间终止点], ……, [区间起始点, 区间终止点] ],
+         ……,
+         "计分板":[ [区间起始点, 区间终止点], [区间起始点, 区间终止点], ……, [区间起始点, 区间终止点] ]
+      }
+      ```
    - `2022/09/12 Morning - Alpha(2.5)`
       - `分数条件` 的书写格式变更，更新为如下格式，即对一个单个的显示内容支持了更多的分数条件 & 于 [0786109](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/07861093026272c99d15f92f70e458d72bd692dc) 更新
       ```
