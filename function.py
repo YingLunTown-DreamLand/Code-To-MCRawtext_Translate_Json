@@ -76,7 +76,7 @@ def outputSelector(input:list,scoreboardName:str)->str:
     `input:list` 得到的补集，其是一个列表
     `scoreboardName:str` 一个字符串，即计分板名称
     \n返回值
-    返回字符串，是转换好的 `scores` 目标选择器参数
+    返回字符串，是转换好的 `scores` 目标选择器参数，格式为 `计分板=!区间,计分板=!区间, ……, 计分板=!区间`
     """
     # 函数声明
     ans = []
@@ -92,13 +92,64 @@ def outputSelector(input:list,scoreboardName:str)->str:
     # 处理 ans 列表的首末项数据
     ans = ",".join(ans)
     # 以 "," 为分隔符拼接列表 ans
-    return 'scores={' + ans + '}'
+    return ans
     # 返回值
 # 将补集转换为目标选择器参数
 
 
 
-def structuralBody(scoreboardName:str,input:list)->dict:
+def getList(input:dict,scoresConditions:dict)->list:
+    """
+    \n摘要
+    本函数作为一个中转过程，根据给定的分数条件、计分板名称、已有的分数条件，将它们转化为 `scores` 目标选择器参数。
+    \n参数
+    `input:dict` 指的是一个包含若干个分数条件的列表，格式如下。
+    \n
+    `{`
+        `"scoreboardA":[ [start, end], [start, end], ……, [start, end] ],`
+        `"scoreboardB":[ [start, end], [start, end], ……, [start, end] ],`
+        \n
+        `……,`
+        `"scoreboardN":[ [start, end], [start, end], ……, [start, end] ]`
+    `}`
+    \n
+    `scoresConditions:dict` 指的是已有的条件，格式同 `input:dict` 不变
+    \n返回值
+    返回一个 `目标选择器` 及目前已有的 分数条件 ，格式是 `[ 选择器:str, 分数条件:dict ]` 。
+    """
+    ans = []
+    # 初始化
+    for i in input:
+        if not i in scoresConditions:
+            scoresConditions[i] = []
+        scoreConditions = [k for k in input[i]]
+        scoresConditions[i] = scoresConditions[i] + scoreConditions
+        # 取得“分数条件”
+        try:
+            ans.append(outputSelector(getComplementarySet(purification(scoresConditions[i])),i))
+        except ZeroDivisionError:
+            print('错误：您给出的 分数条件 存在重复的区间，请检查后重试。被检测到的可能的重复的区间如下：')
+            print(
+                json.dumps(
+                    scoresConditions[i],
+                    sort_keys=True,
+                    indent=4,
+                    separators=(', ', ': '),
+                    ensure_ascii=False
+                    )
+                )
+            os.system("pause")
+            0/0
+        # 得到对应的选择器参数
+    return [
+        '@s[scores={' + ",".join(ans) + '}]',
+        scoresConditions
+        ]
+    # 返回值
+
+
+
+def structuralBody(input:list)->dict:
     """
     \n摘要
     用于处理一个 `结构体` ，然后返回对应的 `JSON` 。
@@ -117,35 +168,20 @@ def structuralBody(scoreboardName:str,input:list)->dict:
             }
         ]
     }
-    scoresConditions = []
+    scoresConditions = {}
     saveList = []
     # 初始化
     for i in range(min((len(input)),7)):
-        for j in range(len(input[i]['分数条件'])):
-            scoresConditions.append(input[i]['分数条件'][j])
+        saveData = getList(input[i]['分数条件'],scoresConditions)
+        # 取得“目标选择器 及 分数条件”并保存在 saveData 种
+        scoresConditions = copy.deepcopy(saveData[1])
         nestedLocation = input[i]['嵌套位置']
         # 取得 分数条件 及 嵌套位置
+        ans['rawtext'][0]['with']['rawtext'].append({"selector":saveData[0]})
+        # 插入“分数条件”
         for k in nestedLocation:
-            input[i]['内容'][k-1] = setGroup(input[i]['内容'][k-1])
+            input[i]['内容'][k-1] = structuralBody(input[i]['内容'][k-1]['结构体'])
         # 解析嵌套的部分
-        try:
-            ans['rawtext'][0]['with']['rawtext'].append(
-                {"selector":'@s['+outputSelector(getComplementarySet(purification(scoresConditions)),
-                scoreboardName)+']'}
-            )
-        except ZeroDivisionError:
-            print('错误：您给出的 分数条件 存在重复的区间，请检查后重试。具体错误发生在：')
-            print(
-                json.dumps(
-                    input[i],
-                    sort_keys=True,
-                    indent=4,
-                    separators=(', ', ': '),
-                    ensure_ascii=False
-                    )
-                )
-            os.system("pause")
-            0/0
         if len(input[i]['内容']) > 1:
             saveList.append({"rawtext":input[i]['内容']})
         else:
@@ -153,63 +189,43 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                 saveList.append(input[i]['内容'][0])
             else:
                 saveList.append({"text":""})
-        # 向 ans 列表放入“分数条件”
-        # 向 saveList 列表放入“显示内容”
+        # 放入“显示内容”
     # 处理至多 7 项的内容
+
+
     if len(input) > 8:
         ans['rawtext'][0]['translate'] = '%%9'
         # 此时应该显示 with 复合标签中的第 9 项元素
-        scoresConditions = []
+        scoresConditions = {}
         for i in range(len(input)):
-            for j in range(len(input[i]['分数条件'])):
-                scoresConditions.append(input[i]['分数条件'][j])
-        try:
-            ans['rawtext'][0]['with']['rawtext'].append(
-                {"selector":'@s['+outputSelector(getComplementarySet(purification(scoresConditions)),
-                scoreboardName)+']'}
-            )
-        except ZeroDivisionError:
-            print('错误：您给出的 分数条件 存在重复的区间，请检查后重试。具体错误发生在：')
-            print(
-                json.dumps(
-                    input,
-                    sort_keys=True,
-                    indent=4,
-                    separators=(', ', ': '),
-                    ensure_ascii=False
-                    )
-                )
-            os.system("pause")
-            0/0
+            scoresConditions = (getList(input[i]['分数条件'],scoresConditions))[1]
+        ans['rawtext'][0]['with']['rawtext'].append(
+            {
+                "selector":(
+                    getList(scoresConditions,{})
+                    )[0]
+            })
         # 此时应筛选出所有条件下的结果，并作为 with 复合标签的第 8 项元素
         for i in saveList:
             ans['rawtext'][0]['with']['rawtext'].append(i)
         # 将 显示内容 插入到 分数条件(目标选择器) 之后
-        ans['rawtext'][0]['with']['rawtext'].append(structuralBody(scoreboardName,input[7:]))
+        ans['rawtext'][0]['with']['rawtext'].append(structuralBody(input[7:]))
         # 受限于 MC 本身的牛马特性，最多解析到 with 数组的第 9 项，即 8 个条件及对应的 显示内容
         # 这样的话，我们得把第 8 个条件取所有条件的并集，然后向下递归，直到最内层被完成，然后回递
     # 当输入的 input 列表中的元素个数超过 8 时的处理办法
+
+
     else:
         if len(input) == 8:
             ans['rawtext'][0]['translate'] = '%%9'
             # 此时应该显示 with 复合标签中的第 9 项元素
-            for i in range(len(input[-1]['分数条件'])):
-                scoresConditions.append(input[-1]['分数条件'][i])
-            nestedLocation = input[-1]['嵌套位置']
-            # 取得 分数条件 及 嵌套位置
-            for k in nestedLocation:
-                input[-1]['内容'][k-1] = setGroup(input[-1]['内容'][k-1])
-            # 解析嵌套的部分
-            try:
-                ans['rawtext'][0]['with']['rawtext'].append(
-                    {"selector":'@s['+outputSelector(getComplementarySet(purification(scoresConditions)),
-                    scoreboardName)+']'}
-                )
-            except ZeroDivisionError:
-                print('错误：您给出的 分数条件 存在重复的区间，请检查后重试。具体错误发生在：')
-                print(scoresConditions)
-                os.system("pause")
-                0/0
+            ans['rawtext'][0]['with']['rawtext'].append(
+            {
+                "selector":(
+                   getList(input[-1]['分数条件'],scoresConditions)
+                    )[0]
+            })
+            # 放入“分数条件”
             if len(input[-1]['内容']) > 1:
                 saveList.append({"rawtext":input[-1]['内容']})
             else:
@@ -217,34 +233,17 @@ def structuralBody(scoreboardName:str,input:list)->dict:
                     saveList.append(input[-1]['内容'][0])
                 else:
                     saveList.append({"text":""})
-            # 向 ans 列表放入“分数条件”
-            # 向 saveList 列表放入“显示内容”
+            # 放入“显示内容”
         # 当输入的 input 列表中的元素个数为 8 时的处理办法
+
         else:
             ans['rawtext'][0]['translate'] = '%%' + str(len(ans['rawtext'][0]['with']['rawtext']) + 1)
             # 此时应该显示 with 复合标签中的第 条件数+1 项元素
         # 当输入的 input 列表中的元素小于 8 时的处理办法
+
         for i in saveList:
             ans['rawtext'][0]['with']['rawtext'].append(i)
         # 将 显示内容 插入到 分数条件(目标选择器) 之后
     # 当输入的 input 列表中的元素个数小于等于 8 时的处理办法
     return ans
-    # 返回值
-
-
-
-def setGroup(input:dict)->dict:
-    """
-    \n摘要
-    用于处理 `结构体` 的上层建筑
-    \n参数
-    `input:dict` | 指的是 `结构体` 的上层建筑
-    \n返回值
-    返回其内的 `结构体` 所对应的 `JSON` ，数据类型是 `dict`
-    """
-    # 函数声明
-    try:
-        return structuralBody(input['计分板名称'],input['结构体'])
-    except ZeroDivisionError:
-        0/0
     # 返回值

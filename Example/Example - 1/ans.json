@@ -5,7 +5,7 @@
             "with": {
                 "rawtext": [
                     {
-                        "selector": "@s[scores={\"Happy2018new\"=!..7,\"Happy2018new\"=!13..}]"
+                        "selector": "@s[scores={\"Happy2018new\"=!..7,\"Happy2018new\"=!13..,DEMO1=!..0,DEMO1=!3..6,DEMO1=!10..}]"
                     }, 
                     {
                         "rawtext": [
@@ -19,12 +19,12 @@
                                         "with": {
                                             "rawtext": [
                                                 {
-                                                    "selector": "@s[scores={abcd=!..-2,abcd=!3..}]"
+                                                    "selector": "@s[scores={abcd=!..0,abcd=!3..}]"
                                                 }, 
                                                 {
                                                     "rawtext": [
                                                         {
-                                                            "scores": {
+                                                            "score": {
                                                                 "name": "*", 
                                                                 "objective": "√"
                                                             }

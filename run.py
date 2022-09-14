@@ -15,7 +15,7 @@ except:
 # 载入 json
 
 try:
-    jsonContext = function.setGroup(jsonContext)
+    jsonContext = function.structuralBody(jsonContext['结构体'])
 except ZeroDivisionError:
     sys.exit()
 except:
