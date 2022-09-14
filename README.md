@@ -44,7 +44,7 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github
    - `2022/09/14 Morning - Alpha(4.0)`<br>
    下述特性于 [d04ac9f](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/d04ac9f095ae3168bea082865d378b31a24898a3) 更新
       - 弃用 `计分板名称`
-      - `分数条件` 的书写格式变更，更新为如下格式，即对一个单个的显示内容支持了更多的分数条件
+      - `分数条件` 的书写格式变更，更新为如下格式，现在允许使用更多的计分板。每个计分板中列表的条件以 `or(或)` 连接，计分板与计分板之间的条件以 `and(且)` 连接。
       ```
       "分数条件":
       {
