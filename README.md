@@ -48,7 +48,7 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github
          > 例子Ⅲ `"分数条件":{"Demo3":[ [233,"max"] ]}`<br>
          > 例子Ⅳ `"分数条件":{"Demo3":[ [233,"Max"] ]}`<br>
          > 例子Ⅴ `"分数条件":{"Demo3":[ ["min",2018] ]}`<br>
-         > 例子Ⅵ `"分数条件":{"Demo3":[ ["Min",2018] ]}`<br>
+         > 例子Ⅵ `"分数条件":{"Demo3":[ ["Min",2018] ]}`
    - `2022/09/14 Noon - Alpha(4.3)`
       - 修复了 `结构体` 中的元素个数为 `8` 时，第 `8` 个元素中指定的嵌套不被解析的问题 & 于 [e264ef0](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/e264ef0271cd69691ecbf962324ecfe765447d39) 修复
    - `2022/09/14 Morning - Alpha(4.0)`<br>
