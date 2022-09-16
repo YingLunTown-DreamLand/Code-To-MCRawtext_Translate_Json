@@ -41,6 +41,14 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github
 您可以通过 `QQ` 联系我，我的 `QQ` 是 `3527679800` 。
 
 ## 更新日志
+   - `2022/09/16 Morning - Alpha(5.0)`
+      - 优化了输出的 `目标选择器` 并且修复了一些问题；现在对 `分数条件` 中加入了 `最大值` 和 `最小值` ，相关示例具体见下 & 于 [e886fc1](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/e886fc11ee29e86337ca8838fbd9e68a530f0be9) 更新和修复
+         > 例子Ⅰ `"分数条件":{"Demo1":[ ["min","max"] ]}`<br>
+         > 例子Ⅱ `"分数条件":{"Demo2":[ ["Min","Max"] ]}`<br>
+         > 例子Ⅲ `"分数条件":{"Demo3":[ [233,"max"] ]}`<br>
+         > 例子Ⅳ `"分数条件":{"Demo3":[ [233,"Max"] ]}`<br>
+         > 例子Ⅴ `"分数条件":{"Demo3":[ ["min",2018] ]}`<br>
+         > 例子Ⅵ `"分数条件":{"Demo3":[ ["Min",2018] ]}`<br>
    - `2022/09/14 Noon - Alpha(4.3)`
       - 修复了 `结构体` 中的元素个数为 `8` 时，第 `8` 个元素中指定的嵌套不被解析的问题 & 于 [e264ef0](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/e264ef0271cd69691ecbf962324ecfe765447d39) 修复
    - `2022/09/14 Morning - Alpha(4.0)`<br>
