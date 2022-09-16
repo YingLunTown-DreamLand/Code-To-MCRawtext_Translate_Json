@@ -5,7 +5,7 @@
             "with": {
                 "rawtext": [
                     {
-                        "selector": "@s[scores={scoreSave=!..0,scoreSave=!10..}]"
+                        "selector": "@s[scores={scoreSave=1..9}]"
                     }, 
                     {
                         "selector": "@s[scores={scoreSave=!..0,scoreSave=!100..}]"

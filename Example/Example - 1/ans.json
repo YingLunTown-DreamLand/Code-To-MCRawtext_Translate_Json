@@ -5,7 +5,7 @@
             "with": {
                 "rawtext": [
                     {
-                        "selector": "@s[scores={\"Happy2018new\"=!..7,\"Happy2018new\"=!13..,DEMO1=!..0,DEMO1=!3..6,DEMO1=!10..}]"
+                        "selector": "@s[scores={\"Happy2018new\"=8..12,DEMO1=!..0,DEMO1=!3..6,DEMO1=!10..}]"
                     }, 
                     {
                         "rawtext": [
@@ -19,7 +19,7 @@
                                         "with": {
                                             "rawtext": [
                                                 {
-                                                    "selector": "@s[scores={abcd=!..0,abcd=!3..}]"
+                                                    "selector": "@s[scores={abcd=-2147483648..2147483647}]"
                                                 }, 
                                                 {
                                                     "rawtext": [
@@ -46,7 +46,7 @@
                                         "with": {
                                             "rawtext": [
                                                 {
-                                                    "selector": "@s[scores={\"123\"=!..-2019,\"123\"=!-232..15,\"123\"=!513..}]"
+                                                    "selector": "@s[scores={\"123\"=!-2017..15}]"
                                                 }, 
                                                 {
                                                     "text": ""

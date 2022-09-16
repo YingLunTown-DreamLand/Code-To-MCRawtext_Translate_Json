@@ -16,6 +16,17 @@ def purification(self:list)->list:
     """
     # 函数声明
     self = copy.deepcopy(self)
+    # 深拷贝列表
+    for i in range(len(self)):
+        if self[i][0] == 'max' or self[i][0] == 'Max':
+            self[i][0] = 2147483647
+        if self[i][0] == 'min' or self[i][0] == 'Min':
+            self[i][0] = -2147483648
+        if self[i][1] == 'max' or self[i][1] == 'Max':
+            self[i][1] = 2147483647
+        if self[i][1] == 'min' or self[i][1] == 'Min':
+            self[i][1] = -2147483648
+    # 替换
     self = [[min(i[0],i[1]),max(i[0],i[1])] for i in self]
     self.sort()
     # 以列表 self 中每个元素的最左边的数作为基准进行排序，使得总体大体单调递增
@@ -42,27 +53,33 @@ def getComplementarySet(self:list)->list:
     `self:list` | 给定的列表的格式是 `[[区间起点:int, 区间终点:int], ……, [区间起点:int, 区间终点:int]]`
         注意：输入的列表的数据应该是单调递增的，且各个子集没有交集。
     \n返回值
-    返回补集，且格式不变。
+    返回补集，但格式变更为 `[[区间起点:int, 区间终点:int, 类型:int], ……, [区间起点:int, 区间终点:int, 类型:int]]` 。
+    其中，`类型:int` 指的是此区间是否需要被反选。
     """
     # 函数声明
-    Left = -2147483648
-    Right = 2147483647
-    # 设定左右边界
+    Left = -2147483648 # 设定左边界
+    Right = 2147483647 # 设定右边界
     ans = []
     # 初始化
+
     if len(self) == 1:
-        ans.append([Left,self[-1][0]-1])
-        ans.append([self[-1][1]+1,Right])
+        ans.append([self[-1][0],self[-1][1],0])
         return ans
     # 当列表元素为 1 时的处理办法
+
     for i in range(len(self)):
-        if Left != self[i][0]:
-            ans.append([Left,self[i][0]-1])
+        if (Left != self[i][0]) and (self[i][0] > -2147483648):
+            ans.append([Left,self[i][0]-1,1])
         Left = self[i][1]+1
     # 总是对左方取补集
-    ans.append([self[-1][1]+1,Right])
+    if self[-1][1] < 2147483647:
+        ans.append([self[-1][1]+1,Right,1])
     # 对最后一个元素的右方取补集
-    return ans
+
+    if len(ans) == 0:
+        return [[-2147483648,2147483647,0]] # 此时补集为空集，因此此时应当取全集
+    else:
+        return ans
     # 返回结果
 # 取补集
 
@@ -82,14 +99,36 @@ def outputSelector(input:list,scoreboardName:str)->str:
     ans = []
     # 初始化
     for i in input:
-        if i[0] != i[1]:
-            ans.append(f'{scoreboardName}=!{i[0]}..{i[1]}')
+        if i[2] == 0:
+            if i[0] == i[1]:
+                ans.append(f'{scoreboardName}={i[0]}')
+                continue
+            if i[0] == -2147483648 and i[1] == 2147483647:
+                ans.append(f'{scoreboardName}=-2147483648..2147483647')
+                continue
+            if i[0] == -2147483648 and i[1] != 2147483647:
+                ans.append(f'{scoreboardName}=..{i[1]}')
+                continue
+            if i[0] != -2147483648 and i[1] == 2147483647:
+                ans.append(f'{scoreboardName}={i[0]}..')
+                continue
+            if i[0] != -2147483648 and i[1] != 2147483647:
+                ans.append(f'{scoreboardName}={i[0]}..{i[1]}')
+                continue
         else:
-            ans.append(f'{scoreboardName}=!{i[-1]}')
+            if i[0] == i[1]:
+                ans.append(f'{scoreboardName}=!{i[0]}')
+                continue
+            if i[0] == -2147483648 and i[1] != 2147483647:
+                ans.append(f'{scoreboardName}=!..{i[1]}')
+                continue
+            if i[0] != -2147483648 and i[1] == 2147483647:
+                ans.append(f'{scoreboardName}=!{i[0]}..')
+                continue
+            if i[0] != -2147483648 and i[1] != 2147483647:
+                ans.append(f'{scoreboardName}=!{i[0]}..{i[1]}')
+                continue
     # 对列表内每个元素遍历，并转换为可用的选择器参数，然后放入列表 ans 中
-    ans[0] = f'{scoreboardName}=!..{input[0][1]}'
-    ans[-1] = f'{scoreboardName}=!{input[-1][0]}..'
-    # 处理 ans 列表的首末项数据
     ans = ",".join(ans)
     # 以 "," 为分隔符拼接列表 ans
     return ans
