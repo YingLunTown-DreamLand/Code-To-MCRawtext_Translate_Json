@@ -16,7 +16,7 @@
 下载和首次使用
 1. 在 `Termux` 执行此命令：
 ```
-apt update && apt upgrade && apt install python && apt install git && pip install brotli && cd /sdcard && git clone https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/ && cd Code-To-MCRawtext_Translate_Json
+apt update && apt upgrade && apt install python && apt install git && cd /sdcard && git clone https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/ && cd Code-To-MCRawtext_Translate_Json
 ```
 2. 将 `input.json` 放置在路径 `/storage/emulated/0/Code-To-MCRawtext_Translate_Json/` ，然后在 `Termux` 执行命令 `python run.py` 。
 ***
