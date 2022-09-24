@@ -315,8 +315,6 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
         # 为什么这样干应该很好理解，因为你很容易就可以证明，除了 scores 选择器参数外，
         # 其他任何的选择器参数几乎都不支持“取补集”，因此也就只能这样一堆 if else 下去了
         # 如果是手写 JSON 的话，你的大脑应该会爆炸，所以我加入了这个功能后，你应该好好感谢我~
-        # 对了，我喜欢可爱滴男孩纸（划掉）
-        # 我就是个颜控罢了~
 
         if (checkIfNeedToJump(
             scoresConditions,
@@ -398,8 +396,6 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
             # 为什么这样干应该很好理解，因为你很容易就可以证明，除了 scores 选择器参数外，
             # 其他任何的选择器参数几乎都不支持“取补集”，因此也就只能这样一堆 if else 下去了
             # 如果是手写 JSON 的话，你的大脑应该会爆炸，所以我加入了这个功能后，你应该好好感谢我~
-            # 对了，我喜欢可爱滴男孩纸（划掉）
-            # 我就是个颜控罢了~
 
             if (checkIfNeedToJump(
                 scoresConditions,
