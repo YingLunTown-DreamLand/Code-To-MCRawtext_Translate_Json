@@ -41,7 +41,7 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github
 您可以通过 `QQ` 联系我，我的 `QQ` 是 `3527679800` 。
 
 ## 更新日志
-   - `2022/09/24 Afternoon - Alpha(10.0)`
+   - `2022/09/24 Afternoon - Alpha(10.0)`<br>
    下述特性或问题于 [bd7e29c](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/bd7e29ca62240828c1c1964b4db8c0294a4b971f) 更新和修复
       - 修复了使用多个计分板时会由于条件不继承而造成的重大问题
       - 支持了任意形式的 `目标选择器` 及 `选择器参数` 。<br>
