@@ -286,7 +286,12 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
 
 
 
-    for i in range(min((len(input)),7)):
+    ergodicCount = len(input)
+    if ergodicCount > 8:
+        ergodicCount = 7
+    # 获取遍历次数
+
+    for i in range(ergodicCount):
         if ifElseStructural == True and i > 0:
             ans['rawtext'][0]['with']['rawtext'].append(saveList[0])
             # 插入“显示内容”
@@ -364,97 +369,26 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
             else:
                 saveList.append({"text":""})
         # 放入“显示内容”
-    # 处理至多 7 项的内容
+    # 当需要处理超过 8 项的内容时，此处则只会处理 7 项的内容
+    # 当恰好需要处理 8 项的内容时，那么此处就处理 8 项的内容
+
+
+
+    ans['rawtext'][0]['translate'] = '%%' + str(len(ans['rawtext'][0]['with']['rawtext']) + 1)
+            # 此时应该显示 with 复合标签中的第 条件数+1 项元素
+    for i in saveList:
+            ans['rawtext'][0]['with']['rawtext'].append(i)
+        # 将 显示内容 插入到 分数条件(目标选择器) 之后
+
 
 
     if len(input) > 8:
-        ans['rawtext'][0]['translate'] = '%%8'
-        # 此时应该显示 with 复合标签中的第 8 项元素
-        for i in saveList:
-            ans['rawtext'][0]['with']['rawtext'].append(i)
-        # 将 显示内容 插入到 分数条件(目标选择器) 之后
         ans['rawtext'][0]['with']['rawtext'].append(structuralBody(input[7:]))
-        # 受限于 MC 本身的牛马特性，最多解析到 with 数组的第 9 项，即 8 个条件及对应的 显示内容
-        # 不过你仔细分析一下就知道为什么这里用 %%8 而非 %%9
+        # 受限于 MC 本身的一些特性，最多解析到 with 数组的第 9 项，即 8 个条件及对应的 显示内容
         # 这样的话，我们就作一个 if else 结构，然后向下递归，直到最内层被完成，然后回递
     # 当输入的 input 列表中的元素个数超过 8 时的处理办法
 
 
-    else:
-        if len(input) == 8:
-            if ifElseStructural == False and len(input[-1]['显示条件']['其他目标选择器参数']) > 0:
-                ans['rawtext'][0]['translate'] = '%%8'
-                # 此时应该显示 with 复合标签中的第 8 项元素
-                for m in saveList:
-                    ans['rawtext'][0]['with']['rawtext'].append(m)
-                # 将 显示内容 插入到 分数条件(目标选择器) 之后
-                ans['rawtext'][0]['with']['rawtext'].append(structuralBody(input[-1],True))
-                # 处理后续的部分(嵌套)
-                return ans
-                # 返回值
-            # 如果给了 其他目标选择器参数 条件，则需要嵌入一个 if else 结构体
-            # 为什么这样干应该很好理解，因为你很容易就可以证明，除了 scores 选择器参数外，
-            # 其他任何的选择器参数几乎都不支持“取补集”，因此也就只能这样一堆 if else 下去了
-            # 如果是手写 JSON 的话，你的大脑应该会爆炸，所以我加入了这个功能后，你应该好好感谢我~
 
-            if (checkIfNeedToJump(
-                scoresConditions,
-                input[-1]['显示条件']['分数条件']
-                ) == True) or (
-                checkIfSelectorIsChanged(input[-1]['显示条件']['目标选择器'],
-                lastSelector) == True):
-                ans['rawtext'][0]['translate'] = '%%8'
-                # 此时应该显示 with 复合标签中的第 8 项元素
-                for m in saveList:
-                    ans['rawtext'][0]['with']['rawtext'].append(m)
-                # 将 显示内容 插入到 分数条件(目标选择器) 之后
-                ans['rawtext'][0]['with']['rawtext'].append(structuralBody([input[-1]]))
-                # 处理后续的部分(嵌套)
-                return ans
-                # 返回值
-            # 如果当前给出的条件无法满足已有的条件，则使用 if 结构体
-
-            ans['rawtext'][0]['translate'] = '%%9'
-            # 此时应该显示 with 复合标签中的第 9 项元素
-            for k in input[-1]['嵌套位置']:
-                input[-1]['内容'][k-1] = structuralBody(input[-1]['内容'][k-1]['结构体'])
-            # 解析嵌套的部分
-            try:
-                ans['rawtext'][0]['with']['rawtext'].append(
-                {
-                    "selector":(
-                        getList(
-                            input[-1]['显示条件']['分数条件'],
-                            scoresConditions,
-                            input[-1]['显示条件']['目标选择器'],
-                            input[-1]['显示条件']['其他目标选择器参数']
-                            ))[0]
-                })
-            except AttributeError:
-                print(
-                    '错误：您不能提供空条件。您应当保证 分数条件 或 其他选择器参数 至少提供一个条件。'+ 
-                    '具体错误发生在：\n'+f'{input[-1]}')
-                os.system("pause")
-                0/0
-            # 放入“分数条件”
-            if len(input[-1]['内容']) > 1:
-                saveList.append({"rawtext":input[-1]['内容']})
-            else:
-                if len(input[-1]['内容']) == 1:
-                    saveList.append(input[-1]['内容'][0])
-                else:
-                    saveList.append({"text":""})
-            # 放入“显示内容”
-        # 当输入的 input 列表中的元素个数为 8 时的处理办法
-
-        else:
-            ans['rawtext'][0]['translate'] = '%%' + str(len(ans['rawtext'][0]['with']['rawtext']) + 1)
-            # 此时应该显示 with 复合标签中的第 条件数+1 项元素
-        # 当输入的 input 列表中的元素小于 8 时的处理办法
-
-        for i in saveList:
-            ans['rawtext'][0]['with']['rawtext'].append(i)
-        # 将 显示内容 插入到 分数条件(目标选择器) 之后
-    # 当输入的 input 列表中的元素个数小于等于 8 时的处理办法
     return ans
     # 返回值

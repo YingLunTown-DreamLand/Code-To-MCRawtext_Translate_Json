@@ -34,6 +34,21 @@ cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json
 ```
 cd /sdcard && rm -r Code-To-MCRawtext_Translate_Json && git clone https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/
 ```
+
+## 作为 `Api` 使用
+如果您是开发者，那么您可能需要将此工具作为一个 `Api` 使用，而非调用程序本体。<br>
+实际上，虽然本转换器虽然包含多个函数，但您可以由一个函数调用而实现。<br>
+因此，作为 `Api` 来使用本工具并不是一件难事。<br>
+***
+首先，请将本工具相关的代码置于您代码的目录下。<br>
+此处预设变量 `WaitingForTranslate` 已经存放了 `伪代码` 数据(`dict` 类型)。<br>
+那么，执行下述代码片段，转换结果会存放于变量 `TranslateResult` 中。
+```python
+import function
+TranslateResult = function.structuralBody(WaitingForTranslate['结构体'])
+```
+然后，您就可以利用本工具自由地转换 `伪代码` 片段了。
+
 ## 语言
 这个程序只支持中文。
 
