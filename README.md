@@ -56,6 +56,8 @@ TranslateResult = function.structuralBody(WaitingForTranslate['结构体'])
 您可以通过 `QQ` 联系我，我的 `QQ` 是 `3527679800` 。
 
 ## 更新日志
+   - `2022/09/25 Night - Alpha(10.5)`<br>
+      - 删减了不必要的代码并在 `README.md` 中增添了 `Api` 使用说明 & 于 [13cdafe](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/13cdafea18a29d4564a664b36877f869242809ef) 更新
    - `2022/09/24 Afternoon - Alpha(10.0)`<br>
    下述特性或问题于 [bd7e29c](https://github.com/Happy2018new/Code-To-MCRawtext_Translate_Json/commit/bd7e29ca62240828c1c1964b4db8c0294a4b971f) 更新和修复
       - 修复了使用多个计分板时会由于条件不继承而造成的重大问题
