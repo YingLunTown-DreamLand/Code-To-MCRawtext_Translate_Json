@@ -286,12 +286,7 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
 
 
 
-    ergodicCount = len(input)
-    if ergodicCount > 8:
-        ergodicCount = 7
-    # 获取遍历次数
-
-    for i in range(ergodicCount):
+    for i in range(min(len(input),8)):
         if ifElseStructural == True and i > 0:
             ans['rawtext'][0]['with']['rawtext'].append(saveList[0])
             # 插入“显示内容”
@@ -383,7 +378,7 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
 
 
     if len(input) > 8:
-        ans['rawtext'][0]['with']['rawtext'].append(structuralBody(input[7:]))
+        ans['rawtext'][0]['with']['rawtext'].append(structuralBody(input[8:]))
         # 受限于 MC 本身的一些特性，最多解析到 with 数组的第 9 项，即 8 个条件及对应的 显示内容
         # 这样的话，我们就作一个 if else 结构，然后向下递归，直到最内层被完成，然后回递
     # 当输入的 input 列表中的元素个数超过 8 时的处理办法
