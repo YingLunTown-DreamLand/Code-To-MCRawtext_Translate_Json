@@ -8,7 +8,7 @@ import os
 def purification(self:list)->list:
     """
     \n摘要
-    如函数名字 `purification` 一样，其用途是提纯列表的，剔除重复的区间且只保留更晚添加的区间。
+    本函数用于重排列表。当存在重复的区间时返回错误，否则返回单调递增的区间列表。
     \n参数
     `self:list` | 给定的列表的格式是 `[[区间起点:int, 区间终点:int], ……, [区间起点:int, 区间终点:int]]`
     \n返回值
@@ -258,6 +258,7 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
     \n参数
     `input:list` 指的是要被处理的结构体
     `ifElseStructural:bool` 指的是当前处理的结构体是否是一个 `if else` 结构体
+       默认为 `False`
     \n返回值
     返回对应的 `JSON` 形式，数据类型是 `dict` 。
     """
@@ -332,6 +333,7 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
             return ans
             # 返回值
         # 如果当前给出的分数条件无法满足已有的分数条件，则使用 if 结构体
+        # 如果当前的目标选择器与上一次的目标选择器不匹配，则也会使用 if 结构体
 
         try:
             saveData = getList(
@@ -364,16 +366,15 @@ def structuralBody(input:list,ifElseStructural:bool=False)->dict:
             else:
                 saveList.append({"text":""})
         # 放入“显示内容”
-    # 当需要处理超过 8 项的内容时，此处则只会处理 7 项的内容
-    # 当恰好需要处理 8 项的内容时，那么此处就处理 8 项的内容
+    # 处理至多 8 项的内容
 
 
 
     ans['rawtext'][0]['translate'] = '%%' + str(len(ans['rawtext'][0]['with']['rawtext']) + 1)
-            # 此时应该显示 with 复合标签中的第 条件数+1 项元素
+    # 此时应该显示 with 复合标签中的第 条件数+1 项元素
     for i in saveList:
             ans['rawtext'][0]['with']['rawtext'].append(i)
-        # 将 显示内容 插入到 分数条件(目标选择器) 之后
+    # 将 显示内容 插入到 分数条件(目标选择器) 之后
 
 
 
