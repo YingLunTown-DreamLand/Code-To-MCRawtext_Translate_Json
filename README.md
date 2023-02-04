@@ -1,7 +1,4 @@
 # Code-To-MCRawtext_Translate_Json
-**[警告] 此存储库所记录的内容已经过时，因为相关特性已在 `Minecraft Bedrock Edition Preview 1.19.60.24` 移除。**<br>
-**[警告] 因此，本存储库现在改为 `只读` 状态。**
-***
 这是一个翻译软件，用于将 `伪代码` 写成的 `JSON` 文件转换为 `Minecraft Bedrock Edition` 中的 `Tellraw`
 或 `Titleraw` 命令。
 
